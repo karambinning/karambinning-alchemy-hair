@@ -1,0 +1,817 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Alchemy Hair · Lancaster — a magical process of transformation</title>
+<meta name="description" content="Alchemy Hair, Lancaster Leisure Park. Independent salon — cut, colour, balayage, foils, colour correction. Charlie, Marie & Abbie Fisher. On-the-day appointments available. 01524 846697.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0F0E0C;
+    --ink-soft:#1A1815;
+    --paper:#F2E9D8;
+    --paper-soft:#E8DDC7;
+    --brass:#B08B4C;
+    --brass-deep:#8A6A33;
+    --oxblood:#5A1F23;
+    --plaster:#E4C9B6;
+    --rule:rgba(176,139,76,.35);
+    --rule-paper:rgba(15,14,12,.18);
+    --serif:"Cormorant Garamond", "EB Garamond", Georgia, serif;
+    --sans:"Jost", ui-sans-serif, system-ui, sans-serif;
+    --measure:64ch;
+    --rhythm:clamp(.95rem, .55rem + .55vw, 1.075rem);
+  }
+  *,*::before,*::after{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:var(--sans);
+    font-size:var(--rhythm);
+    line-height:1.55;
+    font-weight:400;
+    text-rendering:optimizeLegibility;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,h4,p{margin:0; text-wrap:balance}
+  p{text-wrap:pretty; hyphens:auto}
+  a{color:inherit; text-decoration:none}
+  img,svg{display:block; max-width:100%}
+  ::selection{background:var(--brass); color:var(--ink)}
+
+  /* paper grain only on paper sections */
+  .paper{
+    position:relative;
+    background:var(--paper);
+    color:var(--ink);
+  }
+  .paper::before{
+    content:"";
+    position:absolute; inset:0;
+    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.06 0 0 0 0 0.055 0 0 0 0 0.047 0 0 0 0.55 0'/></filter><rect width='100%' height='100%' filter='url(%23n)' opacity='0.45'/></svg>");
+    opacity:.18;
+    mix-blend-mode:multiply;
+    pointer-events:none;
+    z-index:0;
+  }
+  .ink{
+    background:var(--ink);
+    color:var(--paper);
+  }
+  .ink ::selection{background:var(--brass); color:var(--ink)}
+
+  .wrap{
+    width:min(1240px, 92vw);
+    margin-inline:auto;
+    position:relative;
+    z-index:1;
+  }
+
+  /* ── NAV ─────────────────────────────────────────── */
+  .nav{
+    position:sticky; top:0; z-index:50;
+    background:rgba(15,14,12,.92);
+    backdrop-filter:saturate(140%) blur(6px);
+    color:var(--paper);
+    border-bottom:1px solid rgba(176,139,76,.18);
+  }
+  .nav__row{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:.85rem 0;
+    gap:1.5rem;
+  }
+  .mark{
+    font-family:var(--serif);
+    font-weight:500;
+    font-size:1.35rem;
+    letter-spacing:.02em;
+    display:flex; align-items:baseline; gap:.55rem;
+  }
+  .mark__symbol{
+    display:inline-grid; place-items:center;
+    width:1.6rem; height:1.6rem;
+    border:1px solid var(--brass);
+    border-radius:999px;
+    color:var(--brass);
+    font-family:var(--sans);
+    font-size:.62rem; font-weight:500; letter-spacing:.08em;
+    transform:translateY(.15rem);
+  }
+  .mark em{font-style:italic; color:var(--brass); font-weight:400; padding-left:.1rem}
+  .nav__links{
+    display:none;
+    gap:1.75rem;
+    font-family:var(--sans); font-size:.72rem; letter-spacing:.22em;
+    text-transform:uppercase;
+  }
+  .nav__links a{position:relative; padding-block:.4rem}
+  .nav__links a::after{
+    content:""; position:absolute; left:0; right:100%; bottom:0;
+    height:1px; background:var(--brass); transition:right .35s ease;
+  }
+  .nav__links a:hover::after{right:0}
+  .nav__call{
+    font-family:var(--serif);
+    font-style:italic;
+    font-size:1.05rem;
+    color:var(--brass);
+    border-bottom:1px solid transparent;
+    transition:border-color .25s ease;
+  }
+  .nav__call:hover{border-color:var(--brass)}
+  @media (min-width:780px){
+    .nav__links{display:flex}
+  }
+
+  /* ── HERO ────────────────────────────────────────── */
+  .hero{
+    position:relative;
+    overflow:hidden;
+    padding:clamp(2.5rem, 5vw, 5rem) 0 clamp(3rem, 6vw, 6.5rem);
+    isolation:isolate;
+  }
+  @property --grad-angle{ syntax: "<angle>"; initial-value: 0deg; inherits:false }
+  .hero__drift{
+    position:absolute; inset:-20% -10% -10% -10%;
+    background:
+      radial-gradient(60% 40% at 70% 30%, rgba(176,139,76,.32), transparent 60%),
+      conic-gradient(from var(--grad-angle), rgba(176,139,76,.0), rgba(176,139,76,.22), rgba(90,31,35,.18), rgba(176,139,76,.0));
+    animation:drift 48s linear infinite;
+    filter:blur(8px);
+    z-index:-1;
+  }
+  @keyframes drift{ to{ --grad-angle:360deg } }
+  .hero__grid{
+    display:grid;
+    gap:clamp(2rem, 4vw, 3.5rem);
+    grid-template-columns:1fr;
+    align-items:end;
+  }
+  @media (min-width:960px){
+    .hero__grid{ grid-template-columns:1.55fr .9fr; align-items:end }
+  }
+  .eyebrow{
+    font-family:var(--sans);
+    font-size:.7rem; letter-spacing:.32em; text-transform:uppercase;
+    color:var(--brass);
+    display:flex; align-items:center; gap:.7rem;
+    margin-bottom:1.4rem;
+  }
+  .eyebrow::before{
+    content:""; width:2.2rem; height:1px; background:var(--brass); display:inline-block;
+  }
+  .hero__head{
+    font-family:var(--serif);
+    font-weight:400;
+    font-size:clamp(3rem, 11.5vw, 9.4rem);
+    line-height:.88;
+    letter-spacing:-.025em;
+    color:var(--paper);
+  }
+  .hero__head em{
+    font-style:italic;
+    color:var(--brass);
+    font-weight:500;
+  }
+  .hero__head .small{
+    display:block;
+    font-size:.46em;
+    font-style:italic;
+    color:var(--paper-soft);
+    letter-spacing:-.005em;
+    margin-top:.45em;
+    font-weight:400;
+  }
+  .hero__lede{
+    margin-top:1.6rem;
+    max-width:38ch;
+    color:rgba(242,233,216,.78);
+    font-size:clamp(.98rem, .65rem + .55vw, 1.18rem);
+    line-height:1.55;
+  }
+  .hero__lede em{color:var(--plaster); font-style:italic}
+
+  .ticket{
+    border:1px solid rgba(176,139,76,.35);
+    background:linear-gradient(180deg, rgba(176,139,76,.05), rgba(176,139,76,0) 60%);
+    padding:1.6rem 1.5rem 1.4rem;
+    color:var(--paper);
+    font-family:var(--sans);
+    position:relative;
+  }
+  .ticket::before,
+  .ticket::after{
+    content:""; position:absolute;
+    width:.55rem; height:.55rem; border:1px solid var(--brass);
+    background:var(--ink);
+  }
+  .ticket::before{top:-.32rem; left:-.32rem}
+  .ticket::after{bottom:-.32rem; right:-.32rem}
+  .ticket__label{
+    font-size:.65rem; letter-spacing:.3em; text-transform:uppercase; color:var(--brass);
+    display:flex; align-items:center; justify-content:space-between;
+    border-bottom:1px dashed var(--rule);
+    padding-bottom:.7rem; margin-bottom:.95rem;
+  }
+  .ticket__row{
+    display:flex; justify-content:space-between; align-items:baseline;
+    gap:1rem; padding-block:.55rem;
+    font-size:.85rem;
+    border-bottom:1px dashed rgba(176,139,76,.18);
+  }
+  .ticket__row:last-of-type{border-bottom:0}
+  .ticket__row strong{
+    font-family:var(--serif); font-style:italic; font-weight:500;
+    font-size:1.15rem; color:var(--paper); letter-spacing:.01em;
+  }
+  .ticket__row span{color:rgba(242,233,216,.6); font-size:.7rem; letter-spacing:.2em; text-transform:uppercase}
+  .ticket__call{
+    display:flex; align-items:baseline; justify-content:space-between;
+    gap:1rem;
+    margin-top:1.2rem; padding-top:1.2rem;
+    border-top:1px solid var(--brass);
+  }
+  .ticket__call a{
+    font-family:var(--serif);
+    font-style:italic; font-weight:500;
+    font-size:clamp(1.5rem, 4vw, 2.05rem);
+    color:var(--paper);
+    line-height:1;
+    transition:color .25s ease;
+  }
+  .ticket__call a:hover{color:var(--brass)}
+  .ticket__call em{color:var(--brass); font-style:italic; font-size:.7rem; letter-spacing:.25em; text-transform:uppercase; font-family:var(--sans)}
+
+  /* ── MARQUEE ─────────────────────────────────────── */
+  .marquee{
+    border-block:1px solid var(--brass);
+    background:var(--ink-soft);
+    color:var(--paper);
+    overflow:hidden;
+    padding-block:1.05rem;
+  }
+  .marquee__track{
+    display:inline-flex; gap:3rem; white-space:nowrap;
+    animation:scroll 40s linear infinite;
+    font-family:var(--serif);
+    font-style:italic;
+    font-size:clamp(1.4rem, 2.6vw, 2.1rem);
+    color:var(--paper);
+  }
+  .marquee__track span{display:inline-flex; align-items:center; gap:3rem}
+  .marquee__track span::after{
+    content:"✦"; color:var(--brass); font-style:normal; font-size:.7em;
+  }
+  @keyframes scroll{ to{ transform:translateX(-50%) } }
+
+  /* ── SECTION HEAD ────────────────────────────────── */
+  section{position:relative}
+  .section{padding:clamp(4rem, 8vw, 7rem) 0}
+  .section__head{
+    display:grid;
+    gap:.4rem 2rem;
+    grid-template-columns:1fr;
+    align-items:end;
+    margin-bottom:clamp(2.4rem, 5vw, 4rem);
+  }
+  @media (min-width:780px){
+    .section__head{ grid-template-columns:auto 1fr auto }
+  }
+  .section__num{
+    font-family:var(--sans);
+    font-size:.7rem; letter-spacing:.3em; text-transform:uppercase;
+    color:var(--brass-deep);
+  }
+  .section__title{
+    font-family:var(--serif);
+    font-weight:400;
+    font-size:clamp(2.4rem, 6vw, 4.4rem);
+    line-height:.95;
+    letter-spacing:-.02em;
+  }
+  .section__title em{font-style:italic; color:var(--oxblood)}
+  .ink .section__num{color:var(--brass)}
+  .ink .section__title em{color:var(--brass)}
+  .section__aside{
+    font-size:.82rem;
+    max-width:32ch;
+    color:rgba(15,14,12,.62);
+    text-align:right;
+  }
+  .ink .section__aside{color:rgba(242,233,216,.62)}
+
+  /* ── PRACTICE / STYLISTS ─────────────────────────── */
+  .practice__lede{
+    max-width:42ch;
+    font-family:var(--serif);
+    font-size:clamp(1.3rem, 1.7vw + .9rem, 2rem);
+    font-style:italic;
+    font-weight:400;
+    line-height:1.25;
+    color:var(--ink);
+    margin-bottom:clamp(2.5rem, 5vw, 4rem);
+  }
+  .practice__lede strong{font-style:normal; font-weight:500; color:var(--oxblood)}
+  .stylists{
+    display:grid;
+    gap:1px;
+    grid-template-columns:1fr;
+    background:var(--rule-paper);
+    border:1px solid var(--rule-paper);
+  }
+  @media (min-width:680px){ .stylists{ grid-template-columns:repeat(3,1fr) } }
+  .stylist{
+    background:var(--paper);
+    padding:clamp(1.6rem, 3vw, 2.4rem);
+    display:flex; flex-direction:column; gap:1rem;
+    position:relative;
+    transition:background .35s ease;
+  }
+  .stylist:hover{background:var(--paper-soft)}
+  .stylist__tile{
+    width:clamp(4rem, 7vw, 5.4rem);
+    aspect-ratio:1;
+    border:1.5px solid var(--ink);
+    padding:.45rem;
+    display:grid;
+    grid-template-rows:auto 1fr auto;
+    font-family:var(--sans);
+    background:var(--paper);
+  }
+  .stylist__tile .no{font-size:.55rem; letter-spacing:.2em; text-align:left; color:var(--ink)}
+  .stylist__tile .sym{
+    font-family:var(--serif); font-style:italic;
+    font-size:clamp(1.6rem, 3vw, 2.2rem);
+    text-align:center; align-self:center;
+    color:var(--ink); line-height:1;
+  }
+  .stylist__tile .mass{font-size:.55rem; letter-spacing:.2em; text-align:right; color:var(--ink)}
+  .stylist__name{
+    font-family:var(--serif);
+    font-size:clamp(1.7rem, 2.4vw, 2.3rem);
+    font-weight:500;
+    line-height:1;
+    letter-spacing:-.01em;
+  }
+  .stylist__role{
+    font-family:var(--sans);
+    font-size:.7rem; letter-spacing:.25em; text-transform:uppercase;
+    color:var(--brass-deep);
+  }
+  .stylist__book{
+    margin-top:auto;
+    font-family:var(--serif);
+    font-style:italic;
+    font-size:1.05rem;
+    color:var(--oxblood);
+    align-self:flex-start;
+    padding-block:.35rem;
+    border-bottom:1px solid currentColor;
+    transition:color .25s ease, letter-spacing .35s ease;
+  }
+  .stylist__book:hover{color:var(--ink); letter-spacing:.01em}
+  .stylist__book::after{content:" ↗"; font-style:normal}
+
+  /* ── MENU ────────────────────────────────────────── */
+  .menu{
+    display:grid;
+    grid-template-columns:1fr;
+    gap:clamp(2.5rem, 5vw, 4rem) clamp(2rem, 5vw, 5rem);
+  }
+  @media (min-width:880px){
+    .menu{ grid-template-columns:1fr 1fr }
+    .menu__group--gents{grid-column:1 / -1}
+  }
+  .menu__group h3{
+    font-family:var(--serif);
+    font-weight:400;
+    font-size:clamp(1.6rem, 2vw + .8rem, 2.3rem);
+    font-style:italic;
+    color:var(--brass);
+    margin-bottom:1.3rem;
+    border-bottom:1px solid var(--brass);
+    padding-bottom:.5rem;
+    display:flex; align-items:baseline; justify-content:space-between;
+  }
+  .menu__group h3 small{
+    font-family:var(--sans); font-style:normal;
+    font-size:.65rem; letter-spacing:.3em; text-transform:uppercase;
+    color:rgba(242,233,216,.55);
+  }
+  .menu__row{
+    display:grid;
+    grid-template-columns:auto 1fr auto;
+    align-items:baseline;
+    gap:.6rem;
+    padding-block:.85rem;
+    font-family:var(--serif);
+  }
+  .menu__row + .menu__row{border-top:1px dashed rgba(176,139,76,.25)}
+  .menu__row .name{
+    font-size:clamp(1.1rem, 1.5vw, 1.35rem);
+    font-weight:500;
+    color:var(--paper);
+  }
+  .menu__row .dots{
+    border-bottom:1px dotted rgba(176,139,76,.4);
+    transform:translateY(-.35rem);
+    height:1px;
+  }
+  .menu__row .price{
+    font-style:italic;
+    font-size:1.25rem;
+    color:var(--brass);
+    font-weight:500;
+    white-space:nowrap;
+  }
+  .menu__row .note{
+    grid-column:1 / -1;
+    font-family:var(--sans);
+    font-size:.74rem; letter-spacing:.05em;
+    color:rgba(242,233,216,.55);
+    margin-top:.15rem;
+  }
+  .menu__foot{
+    margin-top:clamp(2.5rem, 5vw, 3.5rem);
+    padding-top:1.5rem;
+    border-top:1px solid var(--brass);
+    font-family:var(--serif);
+    font-style:italic;
+    font-size:1rem;
+    color:rgba(242,233,216,.7);
+    display:grid; gap:.4rem;
+    text-align:center;
+  }
+  .menu__foot strong{color:var(--brass); font-style:normal; font-weight:500; letter-spacing:.02em}
+
+  /* ── FIND US ─────────────────────────────────────── */
+  .find{
+    display:grid;
+    grid-template-columns:1fr;
+    gap:clamp(2rem, 4vw, 3.5rem);
+  }
+  @media (min-width:880px){ .find{ grid-template-columns:1fr 1fr; align-items:start } }
+  .find__card{
+    padding:clamp(1.8rem, 3vw, 2.4rem);
+    background:var(--ink);
+    color:var(--paper);
+    border:1px solid var(--brass);
+    display:grid; gap:1.4rem;
+  }
+  .find__line{
+    display:grid;
+    grid-template-columns:auto 1fr;
+    gap:1.2rem;
+    align-items:baseline;
+    padding-bottom:1.2rem;
+    border-bottom:1px dashed rgba(176,139,76,.3);
+  }
+  .find__line:last-child{border-bottom:0; padding-bottom:0}
+  .find__label{
+    font-family:var(--sans); font-size:.65rem;
+    letter-spacing:.3em; text-transform:uppercase;
+    color:var(--brass);
+  }
+  .find__value{
+    font-family:var(--serif);
+    font-size:1.15rem; line-height:1.4;
+  }
+  .find__value a{color:inherit; border-bottom:1px solid rgba(176,139,76,.4)}
+  .find__value a:hover{border-color:var(--brass)}
+  .find__value em{font-style:italic; color:var(--brass)}
+
+  .find__story{
+    font-family:var(--serif);
+    font-size:clamp(1.05rem, 1.2vw + .85rem, 1.35rem);
+    line-height:1.55;
+    color:var(--ink);
+  }
+  .find__story p + p{margin-top:1.2rem}
+  .find__story em{color:var(--oxblood); font-style:italic}
+  .find__story strong{font-weight:500; color:var(--brass-deep)}
+
+  /* scroll reveal where supported */
+  @supports (animation-timeline: view()) {
+    .reveal{
+      animation: rise both;
+      animation-timeline: view();
+      animation-range: entry 0% cover 30%;
+    }
+    @keyframes rise{
+      from{ opacity:0; transform:translateY(1.5rem) }
+      to{ opacity:1; transform:translateY(0) }
+    }
+  }
+
+  /* ── FOOTER ──────────────────────────────────────── */
+  .foot{
+    background:var(--ink);
+    color:var(--paper);
+    padding:clamp(3.5rem, 6vw, 6rem) 0 clamp(2rem, 3vw, 3rem);
+    border-top:1px solid var(--brass);
+  }
+  .letterhead{
+    font-family:var(--serif);
+    display:grid;
+    grid-template-columns:1fr;
+    gap:clamp(2rem, 4vw, 3rem);
+    align-items:end;
+  }
+  @media (min-width:780px){ .letterhead{ grid-template-columns:1.5fr 1fr } }
+  .letterhead__name{
+    font-size:clamp(2.2rem, 5vw, 4rem);
+    font-weight:400;
+    line-height:.95;
+    letter-spacing:-.02em;
+  }
+  .letterhead__name em{font-style:italic; color:var(--brass)}
+  .letterhead__addr{
+    font-size:1.1rem;
+    font-style:italic;
+    color:rgba(242,233,216,.78);
+    line-height:1.5;
+  }
+  .letterhead__addr a{color:inherit; border-bottom:1px solid rgba(176,139,76,.4)}
+  .colophon{
+    margin-top:clamp(2rem, 4vw, 3.2rem);
+    padding-top:1.4rem;
+    border-top:1px dashed rgba(176,139,76,.25);
+    display:flex; flex-wrap:wrap; gap:1.5rem; justify-content:space-between;
+    font-family:var(--sans); font-size:.7rem; letter-spacing:.22em; text-transform:uppercase;
+    color:rgba(242,233,216,.55);
+  }
+  .colophon a:hover{color:var(--brass)}
+
+  /* small util */
+  .reduced{ @media (prefers-reduced-motion: reduce) { animation:none !important } }
+</style>
+</head>
+<body>
+
+<!-- ── NAV ─────────────────────────────────────────── -->
+<header class="nav">
+  <div class="wrap nav__row">
+    <a class="mark" href="#top" aria-label="Alchemy Hair, Lancaster">
+      <span class="mark__symbol">AH</span>
+      <span>Alchemy<em>Hair</em></span>
+    </a>
+    <nav class="nav__links" aria-label="Primary">
+      <a href="#practice">The Team</a>
+      <a href="#menu">The Menu</a>
+      <a href="#find">Find Us</a>
+    </nav>
+    <a class="nav__call" href="tel:+441524846697">01524 846697</a>
+  </div>
+</header>
+
+<!-- ── HERO ────────────────────────────────────────── -->
+<main id="top">
+<section class="hero ink" aria-labelledby="hero-head">
+  <div class="hero__drift" aria-hidden="true"></div>
+  <div class="wrap">
+    <p class="eyebrow">Independent salon · Lancaster Leisure Park · Est. Lancaster</p>
+    <div class="hero__grid">
+      <div>
+        <h1 id="hero-head" class="hero__head">
+          A <em>magical</em><br>
+          process of<br>
+          <em>transformation</em>
+          <span class="small">— the Alchemy way of doing hair, since the first appointment.</span>
+        </h1>
+        <p class="hero__lede">
+          Three stylists. One small room at the edge of Williamson&apos;s Park. A practice built on
+          genuine warmth, plenty of laughter, and colour work that <em>leaves you feeling like a million dollars.</em>
+        </p>
+      </div>
+
+      <aside class="ticket" aria-label="Today">
+        <div class="ticket__label"><span>On the day</span><span>LA1 3LA</span></div>
+        <div class="ticket__row">
+          <strong>Appointments available</strong>
+          <span>today</span>
+        </div>
+        <div class="ticket__row">
+          <strong>Free parking</strong>
+          <span>all day</span>
+        </div>
+        <div class="ticket__row">
+          <strong>Patch test</strong>
+          <span>48h prior</span>
+        </div>
+        <div class="ticket__call">
+          <a href="tel:+441524846697">01524&nbsp;846697</a>
+          <em>call to book</em>
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<!-- ── MARQUEE ─────────────────────────────────────── -->
+<div class="marquee" aria-hidden="true">
+  <div class="marquee__track">
+    <span>Foils</span><span>Balayage</span><span>Glaze</span><span>Toner</span>
+    <span>Colour Correction</span><span>Restyle</span><span>Cut &amp; Blowdry</span>
+    <span>Root Touch Up</span>
+    <span>Foils</span><span>Balayage</span><span>Glaze</span><span>Toner</span>
+    <span>Colour Correction</span><span>Restyle</span><span>Cut &amp; Blowdry</span>
+    <span>Root Touch Up</span>
+  </div>
+</div>
+
+<!-- ── PRACTICE ────────────────────────────────────── -->
+<section id="practice" class="section paper" aria-labelledby="practice-title">
+  <div class="wrap">
+    <div class="section__head reveal">
+      <span class="section__num">No. 01 / The Practice</span>
+      <h2 id="practice-title" class="section__title">Stylists <em>in residence.</em></h2>
+      <p class="section__aside">Book by stylist via Fresha — or call the salon to be matched.</p>
+    </div>
+
+    <p class="practice__lede reveal">
+      The Alchemy experience blends <strong>genuine warmth, plenty of laughter,</strong> and
+      beautiful hair results. Three resident stylists, individual diaries, one shared
+      standard of work.
+    </p>
+
+    <div class="stylists">
+      <article class="stylist reveal">
+        <div class="stylist__tile" aria-hidden="true">
+          <span class="no">01</span><span class="sym">Ch</span><span class="mass">stylist</span>
+        </div>
+        <h3 class="stylist__name">Charlie</h3>
+        <p class="stylist__role">Cut · Colour · Foils</p>
+        <a class="stylist__book" href="https://www.fresha.com/" rel="noopener" aria-label="Book with Charlie via Fresha">Book with Charlie</a>
+      </article>
+
+      <article class="stylist reveal">
+        <div class="stylist__tile" aria-hidden="true">
+          <span class="no">02</span><span class="sym">Ma</span><span class="mass">stylist</span>
+        </div>
+        <h3 class="stylist__name">Marie</h3>
+        <p class="stylist__role">Colour · Balayage · Toner</p>
+        <a class="stylist__book" href="https://www.fresha.com/" rel="noopener" aria-label="Book with Marie via Fresha">Book with Marie</a>
+      </article>
+
+      <article class="stylist reveal">
+        <div class="stylist__tile" aria-hidden="true">
+          <span class="no">03</span><span class="sym">Af</span><span class="mass">stylist</span>
+        </div>
+        <h3 class="stylist__name">Abbie Fisher</h3>
+        <p class="stylist__role">Cut · Restyle · Colour</p>
+        <a class="stylist__book" href="https://www.fresha.com/" rel="noopener" aria-label="Book with Abbie via Fresha">Book with Abbie</a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ── MENU ────────────────────────────────────────── -->
+<section id="menu" class="section ink" aria-labelledby="menu-title">
+  <div class="wrap">
+    <div class="section__head reveal">
+      <span class="section__num">No. 02 / The Menu</span>
+      <h2 id="menu-title" class="section__title">A short list, <em>set carefully.</em></h2>
+      <p class="section__aside">Prices from. Colour services require a patch test at least 48 hours before your appointment.</p>
+    </div>
+
+    <div class="menu">
+      <!-- STYLE -->
+      <div class="menu__group reveal">
+        <h3>Style <small>cuts &amp; finish</small></h3>
+        <div class="menu__row"><span class="name">Dry Cut</span><span class="dots"></span><span class="price">£25</span></div>
+        <div class="menu__row"><span class="name">Wash, Cut &amp; Go</span><span class="dots"></span><span class="price">£30</span></div>
+        <div class="menu__row"><span class="name">Cut &amp; Blowdry</span><span class="dots"></span><span class="price">£40</span></div>
+        <div class="menu__row"><span class="name">Restyle</span><span class="dots"></span><span class="price">£45</span></div>
+        <div class="menu__row">
+          <span class="name">Mini Cut &amp; Blowdry</span><span class="dots"></span><span class="price">£25</span>
+          <span class="note">up to 15 years</span>
+        </div>
+        <div class="menu__row">
+          <span class="name">Mini Dry Cut</span><span class="dots"></span><span class="price">£15</span>
+          <span class="note">up to 15 years</span>
+        </div>
+      </div>
+
+      <!-- COLOUR -->
+      <div class="menu__group reveal">
+        <h3>Colour <small>the alchemy</small></h3>
+        <div class="menu__row"><span class="name">Root Touch Up</span><span class="dots"></span><span class="price">£40</span></div>
+        <div class="menu__row"><span class="name">All Over Colour</span><span class="dots"></span><span class="price">£50</span></div>
+        <div class="menu__row"><span class="name">Half Head Foils</span><span class="dots"></span><span class="price">£50</span></div>
+        <div class="menu__row"><span class="name">Full Head Foils</span><span class="dots"></span><span class="price">£70</span></div>
+        <div class="menu__row"><span class="name">Foils &amp; Root Colour</span><span class="dots"></span><span class="price">£60</span></div>
+        <div class="menu__row"><span class="name">Foils &amp; All Over Colour</span><span class="dots"></span><span class="price">£65</span></div>
+        <div class="menu__row"><span class="name">Balayage</span><span class="dots"></span><span class="price">£75</span></div>
+        <div class="menu__row"><span class="name">Toner / Glaze added</span><span class="dots"></span><span class="price">£20</span></div>
+        <div class="menu__row"><span class="name">Toner / Glaze stand‑alone</span><span class="dots"></span><span class="price">£40</span></div>
+        <div class="menu__row">
+          <span class="name">Colour Correction</span><span class="dots"></span><span class="price">on consult</span>
+          <span class="note">priced individually after consultation</span>
+        </div>
+      </div>
+
+      <!-- GENTS -->
+      <div class="menu__group menu__group--gents reveal">
+        <h3>Gents <small>walk‑in friendly</small></h3>
+        <div class="menu__row"><span class="name">Clipper Cut</span><span class="dots"></span><span class="price">£10</span></div>
+        <div class="menu__row"><span class="name">Dry Cut · clippers &amp; trim</span><span class="dots"></span><span class="price">£15</span></div>
+        <div class="menu__row"><span class="name">Wash &amp; Cut</span><span class="dots"></span><span class="price">enquire</span></div>
+      </div>
+    </div>
+
+    <div class="menu__foot reveal">
+      <p><strong>A patch test</strong> at least 48 hours prior is required for all colour services.</p>
+      <p>To book: <a href="tel:+441524846697" style="color:var(--brass); border-bottom:1px solid">01524 846697</a> · or by stylist on Fresha.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ── FIND US ─────────────────────────────────────── -->
+<section id="find" class="section paper" aria-labelledby="find-title">
+  <div class="wrap">
+    <div class="section__head reveal">
+      <span class="section__num">No. 03 / Find Us</span>
+      <h2 id="find-title" class="section__title">Just off <em>Wyresdale Road.</em></h2>
+      <p class="section__aside">Lancaster Leisure Park, near Williamson&apos;s Park. Bus 18 from Lancaster Bus Station stops at the entrance.</p>
+    </div>
+
+    <div class="find">
+      <div class="find__story reveal">
+        <p>
+          Alchemy sits inside the <em>expanding Lancaster Leisure Park</em>, just off
+          Wyresdale Road, a few minutes&apos; walk from Williamson&apos;s Park. There&apos;s a
+          <strong>free car park</strong> on site — all‑day parking, no ticket, no
+          meter, no worry about your appointment overrunning.
+        </p>
+        <p>
+          If you&apos;re coming in from town, <strong>bus number 18</strong> from
+          Lancaster Bus Station stops right outside the park&apos;s entrance.
+        </p>
+        <p>
+          Same‑day appointments are often available — give us a ring and we&apos;ll
+          see what we can fit in. For colour, please remember the
+          <em>48‑hour patch test.</em>
+        </p>
+      </div>
+
+      <aside class="find__card reveal" aria-label="Salon details">
+        <div class="find__line">
+          <span class="find__label">Address</span>
+          <span class="find__value">
+            Lancaster Leisure Park,<br>
+            Wyresdale Road,<br>
+            Lancaster <em>LA1 3LA</em>
+          </span>
+        </div>
+        <div class="find__line">
+          <span class="find__label">Call</span>
+          <span class="find__value"><a href="tel:+441524846697">01524 846697</a></span>
+        </div>
+        <div class="find__line">
+          <span class="find__label">Email</span>
+          <span class="find__value"><a href="mailto:alchemyhairlancaster@mail.com">alchemyhairlancaster@mail.com</a></span>
+        </div>
+        <div class="find__line">
+          <span class="find__label">Social</span>
+          <span class="find__value">
+            <a href="https://www.instagram.com/alchemyhairlancaster/" rel="noopener">@alchemyhairlancaster</a><br>
+            <a href="https://www.facebook.com/ALCHEMYHAIRLA/" rel="noopener">facebook.com/ALCHEMYHAIRLA</a>
+          </span>
+        </div>
+        <div class="find__line">
+          <span class="find__label">Today</span>
+          <span class="find__value"><em>on‑the‑day appointments available</em> — call for availability</span>
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>
+</main>
+
+<!-- ── FOOTER ──────────────────────────────────────── -->
+<footer class="foot">
+  <div class="wrap">
+    <div class="letterhead">
+      <h2 class="letterhead__name">Alchemy <em>Hair</em><br>Lancaster.</h2>
+      <p class="letterhead__addr">
+        Lancaster Leisure Park,<br>
+        Wyresdale Road, Lancaster LA1 3LA.<br>
+        <a href="tel:+441524846697">01524 846697</a><br>
+        <a href="mailto:alchemyhairlancaster@mail.com">alchemyhairlancaster@mail.com</a>
+      </p>
+    </div>
+    <div class="colophon">
+      <span>Alchemy Hair Lancaster Ltd.</span>
+      <span><a href="https://www.instagram.com/alchemyhairlancaster/" rel="noopener">Instagram</a> · <a href="https://www.facebook.com/ALCHEMYHAIRLA/" rel="noopener">Facebook</a></span>
+      <span>&copy; Alchemy Hair Lancaster</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
